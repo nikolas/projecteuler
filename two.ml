@@ -5,7 +5,7 @@ let rec sum l =
   | [] -> 0
   | h :: t -> h + (sum t)
 
-let rec fib x =
+let fib x =
   let rec loop i a running_total =
     if i = x then a
     else loop (i + 1) (running_total) (a + running_total) in
