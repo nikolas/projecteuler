@@ -8,4 +8,4 @@ $(execs): %.native: %.ml
 .PHONY: clean
 clean:
 	rm -rf _build
-	rm *.native
+	rm -f *.native
