@@ -11,14 +11,14 @@ let rec factsum x =
 let is_curious x =
   phys_equal (factsum x) x
 
-let rec sum l =
-  match l with
-  | [] -> 0
-  | h :: t -> h + (sum t)
+(* get sum of all the curious numbers up to x. *)
+let rec get_curious_sum x =
+  match x with
+  | 0 -> 0
+  | 1 -> 0
+  | 2 -> 0
+  | n -> if is_curious n then n + get_curious_sum (n - 1)
+         else get_curious_sum (n - 1)
 
 let () =
-  for i = 0 to 10000000 do
-    if is_curious i
-    then printf "%d is curious!\n" i
-    else printf ""
-  done
+    printf "get_curious_sum 100000 = %d\n" (get_curious_sum 100000);;
