@@ -1,4 +1,5 @@
-open Core
+open Base
+open Stdio
 
 let is_divisor x y =
   match y with

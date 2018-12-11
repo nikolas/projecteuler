@@ -1,4 +1,5 @@
-open Core
+open Base
+open Stdio
 
 let sieve (max : int) : int =
   5
