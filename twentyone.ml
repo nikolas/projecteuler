@@ -19,7 +19,7 @@ let find_divisors x =
 
 let is_amicable x =
   x = sum (find_divisors (sum (find_divisors x))) &&
-    sum (find_divisors x) != x
+    not (phys_equal (sum (find_divisors x)) x)
 
 let amicable_numbers x =
   let rec loop i target =
