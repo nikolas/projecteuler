@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 
 let rec sum l =
   match l with

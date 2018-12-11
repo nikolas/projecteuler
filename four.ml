@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 
 let reverse s =
   let len = String.length s in

@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 
 let rec sum_of_squares_to x =
   match x with

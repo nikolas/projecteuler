@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 
 let is_divisor x y =
   match y with
