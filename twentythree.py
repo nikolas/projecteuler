@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from itertools import combinations
 import pickle
 from os.path import exists
 
@@ -39,21 +40,12 @@ def is_abundant_sum(x, abundants):
         return True
 
     abundants = abundants[:limit_abundants(x, abundants)]
-    for idx, i in enumerate(abundants):
-        if i + i == x:
+    for n, m in combinations(abundants, 2):
+        if n + n == x or m + m == x or n + m == x:
             return True
 
-        ab = abundants[idx:]
-        for j in range(len(ab)):
-            el = ab[-j]
-
-            # Don't keep going down if this sum is already less than
-            # x. i needs to increase. In this loop, j decreases.
-            if (i + el) < x:
-                break
-
-            if (i + el) == x:
-                return True
+        if n + m > x and m + m > x and n + n > x:
+            return False
 
     return False
 
@@ -77,9 +69,10 @@ def find_non_abundant_nums_to(x):
     total = 0
     for i in range(1, x + 1):
         if i % 100 == 0:
-            print(i)
+            print('---> {} <---'.format(i))
 
-        if not is_abundant_sum(i, abundants):
+        half_i = i // 2
+        if not is_abundant_sum(i, abundants[:half_i]):
             nums.append(i)
             total += i
             print('{} is a non-abundant sum. Running total: {}'.format(
