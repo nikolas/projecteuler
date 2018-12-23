@@ -46,6 +46,12 @@ def is_abundant_sum(x, abundants):
         ab = abundants[idx:]
         for j in range(len(ab)):
             el = ab[-j]
+
+            # Don't keep going down if this sum is already less than
+            # x. i needs to increase. In this loop, j decreases.
+            if (i + el) < x:
+                break
+
             if (i + el) == x:
                 return True
 
