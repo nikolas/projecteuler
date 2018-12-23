@@ -21,7 +21,7 @@ def is_abundant(x):
 
 def find_abundants_to(x):
     nums = []
-    for i in range(x):
+    for i in range(x + 1):
         if is_abundant(i):
             nums.append(i)
 
@@ -40,8 +40,13 @@ def is_abundant_sum(x, abundants):
 
     abundants = abundants[:limit_abundants(x, abundants)]
     for idx, i in enumerate(abundants):
-        for j in abundants[idx:]:
-            if (i + j) == x and i != j:
+        if i + i == x:
+            return True
+
+        ab = abundants[idx:]
+        for j in range(len(ab)):
+            el = ab[-j]
+            if (i + el) == x:
                 return True
 
     return False
@@ -51,7 +56,7 @@ def find_non_abundant_nums_to(x):
     abundants = []
 
     fname = 'abundants.txt'
-    if True or not exists(fname):
+    if not exists(fname):
         print('Finding abundants...')
         abundants = find_abundants_to(x)
         with open(fname, 'wb') as f:
@@ -61,12 +66,20 @@ def find_non_abundant_nums_to(x):
         with open(fname, 'rb') as f:
             abundants = pickle.load(f)
 
-    for i in range(x):
+    print(abundants[:10])
+
+    total = 0
+    for i in range(1, x + 1):
+        if i % 100 == 0:
+            print(i)
+
         if not is_abundant_sum(i, abundants):
-            print('{} is non-abundant.'.format(i))
             nums.append(i)
+            total += i
+            print('{} is a non-abundant sum. Running total: {}'.format(
+                i, total))
 
     return nums
 
 if __name__ == '__main__':
-    print(sum(find_non_abundant_nums_to(16000)))
+    print(sum(find_non_abundant_nums_to(28123)))
