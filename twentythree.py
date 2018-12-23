@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from datetime import datetime
 from itertools import combinations
 import pickle
 from os.path import exists
@@ -36,9 +37,6 @@ def limit_abundants(x, abundants):
     return len(abundants)
 
 def is_abundant_sum(x, abundants):
-    if x > 100 and x % 2 == 0:
-        return True
-
     abundants = abundants[:limit_abundants(x, abundants)]
     for n, m in combinations(abundants, 2):
         if n + n == x or m + m == x or n + m == x:
@@ -67,9 +65,19 @@ def find_non_abundant_nums_to(x):
     print(abundants[:10])
 
     total = 0
+    lastn = datetime.now()
+
     for i in range(1, x + 1):
+        if i != 12 and i % 12 == 0:
+            continue
+
         if i % 100 == 0:
-            print('---> {} <---'.format(i))
+            print('---> {} <--- ({})'.format(i, datetime.now() - lastn))
+
+        lastn = datetime.now()
+
+        if i > 100 and i % 2 == 0:
+            continue
 
         half_i = i // 2
         if not is_abundant_sum(i, abundants[:half_i]):
