@@ -25,7 +25,6 @@ fn is_all_odd(n: u32) -> bool {
 }
 
 fn main() {
-    //let mut vec = Vec::new();
     let mut count = 0;
 
     for i in 10..100_000_000 {
@@ -33,7 +32,6 @@ fn main() {
             let n: u32 = reversed(i);
             let sum = i + n;
             if is_all_odd(sum) {
-                //vec.push(i);
                 count += 1;
             }
         }
