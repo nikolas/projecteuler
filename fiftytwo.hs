@@ -12,3 +12,5 @@ findPermMult n =
       shareDigits n (6 * n))
   then n
   else findPermMult (n + 1)
+
+main = putStrLn $ show (findPermMult 999999)
